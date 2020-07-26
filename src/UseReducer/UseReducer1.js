@@ -7,6 +7,7 @@ const UseReducer1 = (props) => {
     const [count, dispatch] = useReducer(reducer, initialState);
     return (
         <div>
+            <hr />
             {count}
             <button
                 onClick = {() => dispatch('INC')}>
@@ -30,6 +31,21 @@ const UseReducer1 = (props) => {
             <div>
                 <button onClick={props.onAdd}>Add 10 using redux</button>
             </div>
+            <hr />
+            <div>
+                <button onClick={props.onStoreResult}>Store Result</button>
+            </div>
+            <div>
+                <ul>
+                    {
+                        props.storedResult.map(str => (
+                            <li onClick={props.onDeleteResult} key={str.id}>{str.value}</li>
+                        ))
+                    }
+                    
+                </ul>
+            </div>
+            <hr />
         </div>
     );
 }
@@ -40,14 +56,17 @@ const mapStateToProps = state => {  //Maps the redux state to props of component
     return {
         ctr: state.counter,
         name: state.name,
-        surname: state.surname
+        surname: state.surname,
+        storedResult: state.results
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
-        onAdd: () => dispatch({ type: 'ADD', value: 10 })
+        onAdd: () => dispatch({ type: 'ADD', value: 10 }),
+        onStoreResult: () => dispatch({ type: 'STORE_RESULT' }),
+        onDeleteResult: () => dispatch({ type: 'DELETE_RESULT' })
     }
 }
 
