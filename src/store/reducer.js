@@ -1,3 +1,5 @@
+import * as actionTypes from './actions'
+
 const initialState = {
     counter: 0,
     name: '',
@@ -8,24 +10,24 @@ const initialState = {
 const reducer = ( state = initialState, action ) => {
 
     switch(action.type) {
-        case 'INCREMENT':
+        case actionTypes.INCREMENT:
             return {
                 ...state,
                 counter: state.counter + 1,
                 surname: state.surname = 'Khoje'
             }
-        case 'ADD':
+        case actionTypes.ADD:
             return {
                 ...state,
                 counter: state.counter + action.value,
                 name: state.name = 'Amey'
             }
-        case 'STORE_RESULT':
+        case actionTypes.STORE_RESULTS:
             return {
                 ...state,
                 results: state.results.concat({id: new Date(),value:state.counter})
             }
-        case 'DELETE_RESULT':
+        case actionTypes.DELETE_RESULT:
             //This is one implementation in which we return newArray finally
             // const id = 2;
             // const newArray = [...state.results]  //here we copy prev array to newArray to update it immutably

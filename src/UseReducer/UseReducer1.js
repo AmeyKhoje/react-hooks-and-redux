@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import { connect } from 'react-redux'  //connect is function that returns HOC
 import { reducer } from '../reducers/reducerOne'
+import * as actionTypes from '../store/actions'
 
 const UseReducer1 = (props) => {
     const initialState = 0;
@@ -63,10 +64,11 @@ const mapStateToProps = state => {  //Maps the redux state to props of component
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
-        onAdd: () => dispatch({ type: 'ADD', value: 10 }),
-        onStoreResult: () => dispatch({ type: 'STORE_RESULT' }),
-        onDeleteResult: (id) => dispatch({ type: 'DELETE_RESULT', resultElId: id })
+        // onIncrementCounter: () => dispatch({type: 'INCREMENT'}),  //This is basic hardcoded type of action
+        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}), //This all are outsourced action types from store/actions.js and same we will import in reducers.
+        onAdd: () => dispatch({ type: actionTypes.ADD, value: 10 }),
+        onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULTS }),
+        onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
     }
 }
 
