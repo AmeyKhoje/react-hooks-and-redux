@@ -5,7 +5,9 @@ import * as actionTypes from '../store/actions'
 
 const UseReducer1 = (props) => {
     const initialState = 0;
+
     const [count, dispatch] = useReducer(reducer, initialState);
+    console.log(new Date());
     return (
         <div>
             <hr />
@@ -34,13 +36,13 @@ const UseReducer1 = (props) => {
             </div>
             <hr />
             <div>
-                <button onClick={props.onStoreResult}>Store Result</button>
+                <button onClick={() => props.onStoreResult(props.ctr) }>Store Result</button>
             </div>
             <div>
                 <ul>
                     {
                         props.storedResult.map(str => (
-                            <li onClick={() => props.onDeleteResult(str.id)} key={str.id}>{str.value}</li>
+                        <li onClick={() => props.onDeleteResult(str.id)} key={str.id}>{str.value}</li>
                         ))
                     }
                     
@@ -55,10 +57,10 @@ const UseReducer1 = (props) => {
 
 const mapStateToProps = state => {  //Maps the redux state to props of component
     return {
-        ctr: state.counter,
-        name: state.name,
-        surname: state.surname,
-        storedResult: state.results
+        ctr: state.ctr.counter,
+        name: state.ctr.name,
+        surname: state.ctr.surname,
+        storedResult: state.res.results
     }
 }
 
@@ -67,7 +69,7 @@ const mapDispatchToProps = dispatch => {
         // onIncrementCounter: () => dispatch({type: 'INCREMENT'}),  //This is basic hardcoded type of action
         onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}), //This all are outsourced action types from store/actions.js and same we will import in reducers.
         onAdd: () => dispatch({ type: actionTypes.ADD, value: 10 }),
-        onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULTS }),
+        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULTS, result: result }),
         onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
     }
 }
