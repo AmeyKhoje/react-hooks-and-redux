@@ -39,7 +39,7 @@ const UseReducer1 = (props) => {
                 <ul>
                     {
                         props.storedResult.map(str => (
-                            <li onClick={props.onDeleteResult} key={str.id}>{str.value}</li>
+                            <li onClick={() => props.onDeleteResult(str.id)} key={str.id}>{str.value}</li>
                         ))
                     }
                     
@@ -66,7 +66,7 @@ const mapDispatchToProps = dispatch => {
         onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
         onAdd: () => dispatch({ type: 'ADD', value: 10 }),
         onStoreResult: () => dispatch({ type: 'STORE_RESULT' }),
-        onDeleteResult: () => dispatch({ type: 'DELETE_RESULT' })
+        onDeleteResult: (id) => dispatch({ type: 'DELETE_RESULT', resultElId: id })
     }
 }
 
