@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { connect } from 'react-redux'  //connect is function that returns HOC
 import { reducer } from '../reducers/reducerOne'
-import * as actionTypes from '../store/actions'
+import * as actionCreators from '../store/actions/index'
 
 const UseReducer1 = (props) => {
     const initialState = 0;
@@ -67,10 +67,15 @@ const mapStateToProps = state => {  //Maps the redux state to props of component
 const mapDispatchToProps = dispatch => {
     return {
         // onIncrementCounter: () => dispatch({type: 'INCREMENT'}),  //This is basic hardcoded type of action
-        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}), //This all are outsourced action types from store/actions.js and same we will import in reducers.
-        onAdd: () => dispatch({ type: actionTypes.ADD, value: 10 }),
-        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULTS, result: result }),
-        onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
+        // onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }), //This all are outsourced action types from store/actions.js and same we will import in reducers.
+        // onAdd: () => dispatch({ type: actionTypes.ADD, value: 10 }),
+        // onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULTS, result: result }),
+        // onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
+        // these all are action creators for async functionality in redux
+        onIncrementCounter: () => dispatch(actionCreators.increment()),
+        onAdd: () => dispatch(actionCreators.add(10)),
+        onStoreResult: (result) => dispatch(actionCreators.storeResult(result)),
+        onDeleteResult: (id) => dispatch(actionCreators.deleteResult(id))
     }
 }
 

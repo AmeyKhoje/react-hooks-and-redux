@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions'
+import * as actionTypes from '../actions/actionsTypes'
 
 const initialState = {
     results: []
@@ -7,7 +7,7 @@ const initialState = {
 const reducer = ( state = initialState, action ) => {
 
     switch(action.type) {
-        case actionTypes.STORE_RESULTS:
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
                 results: state.results.concat({id: new Date(),value: action.result})
@@ -19,7 +19,7 @@ const reducer = ( state = initialState, action ) => {
             // newArray.splice(id, 1) //.splice(index, no. of items we want to remove) => syntax of splice
 
             //We sill see another way now using filter
-            const updatedArray = state.results.filter(result => result.id !== action.resultElId)
+            const updatedArray = state.results.filter(result => result.id !== action.resultElID)
             return {
                 ...state,
                 results: updatedArray
